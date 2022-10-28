@@ -14,7 +14,7 @@ app.use(express.json());
 
 //Database MonogoDB
 console.log("Connecting to Database...")
-const dbURI = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.csag5ai.mongodb.net/inventory-app?retryWrites=true&w=majority`
+// const dbURI = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.csag5ai.mongodb.net/inventory-app?retryWrites=true&w=majority`
 const dbPromise = mongoose.connect(process.env.dbURI_INVENTORY_APP)
 dbPromise.then( result => {
     console.log("Connected to database");

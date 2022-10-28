@@ -12,6 +12,7 @@ const userRouter = require('./userRouter').router;
 // https://www.app.domain.com/api/v1/categories/catID
 // https://www.app.domain.com/api/v1//items/itemID
 // https://www.app.domain.com/api/v1/users/userID
+// http://inventoryapp-reidcj.netlify.app/.netlify/functions/server/api/v1/
 
 const router = express.Router();
 const v = "v1"; //version number, (v1, v2, v3, etc.) //version number
