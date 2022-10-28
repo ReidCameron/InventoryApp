@@ -34,4 +34,9 @@ app.use("/", (req, res) =>{
 
 // module.app = app;
 module.exports = {app, dbPromise};
-module.exports.handler = serverless(app);
+// module.exports.handler = serverless(app); //OLD
+const handler = serverless(app);
+module.exports.handler = async (event, context) => {
+  const result = await handler(event, context);
+  return result;
+};
