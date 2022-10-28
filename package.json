@@ -1,17 +1,16 @@
 {
+  "name": "inventory-app",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "dev": "concurrently \"nodemon start-client.js\" & \"nodemon start.js\"",
     "dev1": "nodemon start.js",
-    "dev2": "nodemon start-client.js"
+    "dev2": "nodemon start-client.js",
+    "build": "netlify-lambda build express"
   },
   "dependencies": {
-    "cors": "^2.8.5",
-    "ejs": "^3.1.8",
     "express": "^4.18.2",
     "mongoose": "^6.6.5",
+    "netlify-lambda": "^2.0.15",
     "serverless-http": "^3.0.3"
-  },
-  "devDependencies": {
-    "concurrently": "^7.4.0"
   }
 }
