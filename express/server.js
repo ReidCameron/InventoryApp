@@ -25,9 +25,9 @@ const apiRoute = "/.netlify/functions/server/api"
 
 
 //Netlify Lambda Function
-// app.get("/.netlify/functions/identity-login", (req, res) =>{
-  // console.log("user logged in");
-// });
+app.get("/.netlify/functions/identity-login", (req, res) =>{
+  res.json({"Message" : "user logged in"});
+});
 app.use(apiRoute, apiRouter);
 
 //Angular App DEBUG
