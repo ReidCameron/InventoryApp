@@ -22,7 +22,7 @@ dbPromise.then( result => {
 //API
 const apiRouter = require('../api/apiRouter'); //express.Router();
 // const apiRoute = "/.netlify/functions/server/api"
-const apiRoute = "api"
+const apiRoute = "/api"
 
 //Netlify Lambda Function
 // app.get("/.netlify/functions/identity-login", (req, res) =>{
