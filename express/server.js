@@ -25,9 +25,9 @@ const apiRoute = "/.netlify/functions/server/api"
 
 
 //Netlify Lambda Function
-app.get("/.netlify/functions/identity-login", (req, res) =>{
-  res.json({"Message" : "user logged in"});
-});
+// app.get("/.netlify/functions/server/identity-login", (req, res) =>{
+//   res.json({"Message" : "user logged in"});
+// });
 app.use(apiRoute, apiRouter);
 
 //Angular App DEBUG
@@ -42,6 +42,5 @@ const handler = serverless(app);
 module.exports.handler = async (event, context) => {
   const result = await handler(event, context);
   const { identity, user } = context.clientContext;
-  console.log("hello");
   return result;
 };
