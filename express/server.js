@@ -14,7 +14,6 @@ app.use(express.json());
 
 //Database MonogoDB
 console.log("Connecting to Database...")
-// const dbURI = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.csag5ai.mongodb.net/inventory-app?retryWrites=true&w=majority`
 const dbPromise = mongoose.connect(process.env.dbURI_INVENTORY_APP)
 dbPromise.then( result => {
     console.log("Connected to database");
@@ -25,18 +24,23 @@ const apiRouter = require('../api/apiRouter'); //express.Router();
 const apiRoute = "/.netlify/functions/server/api"
 
 //Netlify Lambda Function
+// app.get("/.netlify/functions/identity-login", (req, res) =>{
+  // console.log("user logged in");
+// });
 app.use(apiRoute, apiRouter);
 
-//404 TODO: Might not need this...figure out if angular handles the 404
-app.use("/", (req, res) =>{
-    res.sendFile(path.join(process.cwd(), "./404.html"));
-});
+//Angular App DEBUG
+app.use(express.static('dist'));
+app.get("/*", (req, res) =>{
+  res.sendFile(path.join(__dirname, "../dist/index.html"))
+})
 
-// module.app = app;
 module.exports = {app, dbPromise};
 // module.exports.handler = serverless(app); //OLD
 const handler = serverless(app);
 module.exports.handler = async (event, context) => {
   const result = await handler(event, context);
+  const { identity, user } = context.clientContext;
+  console.log("hello");
   return result;
 };
