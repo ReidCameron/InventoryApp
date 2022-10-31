@@ -5,10 +5,11 @@ exports.handler = async function (event, context) {
   const body = JSON.parse(event.body)
   const userID = body.user.id;
   const uri = "https://inventoryapp-reidcj.netlify.app/.netlify/functions/server/api/v1/users"
-
+  console.log("--------User Name--------");
+  console.log(body.user.user_metadata.full_name)
   axios.post(uri, {
     auth_id: userID,
-    full_name: body.user.full_name,
+    full_name: body.user.user_metadata.full_name,
   }).then( res => {
     return {
       statusCode: 200,
