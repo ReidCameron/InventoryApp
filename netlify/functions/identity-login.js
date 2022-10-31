@@ -3,8 +3,10 @@ exports.handler = async function (event, context) {
 
     var today = new Date();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    
-    console.log(`A user initiated a \"${event}\" event at ${time}`)
+    console.log("----------------------------------------------");
+    console.log(identity);
+    console.log(user);
+    console.log(`A user initiated a \"${JSON.stringify(event)}\" event at ${time}`)
     
     return {
       statusCode: 200,
