@@ -4,7 +4,7 @@ exports.handler = async function (event, context) {
     var today = new Date();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     
-    console.log(`The user \"${user.user_metadata.full_name}\" initiated a \"${event}\" event at ${time}`)
+    console.log(`A user initiated a \"${event}\" event at ${time}`)
     
     return {
       statusCode: 200,
