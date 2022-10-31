@@ -6,13 +6,15 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    first_name: {
+    full_name: {
         type: String,
         required: true
     },
+    first_name: {
+        type: String,
+    },
     last_name: {
         type: String,
-        required: true
     },
     organization_ids: Array,
 });

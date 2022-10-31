@@ -114,13 +114,10 @@ router.delete("/:orgID", (req, res) =>{
 router.get("/:orgID/departments", (req, res) =>{
     Organization.findOne(
         {_id: mongoose.Types.ObjectId(req.params.orgID)}, 
-        {'departments' : 1},
+        {'_id':0,'departments' : 1},
         (err, docs) => {
-            if(err || docs == null){
-                res.json({"Error": (docs != null)? err:"Docs is null"})
-            } else {
-                res.json(docs.departments)
-            }
+            if (err || docs == null) res.json({"Error": (docs != null)? err:"Docs is null"})
+            else res.json(docs.departments)
         }
     );
 });
@@ -142,12 +139,28 @@ router.post("/:orgID/departments", (req, res) =>{
 router.get("/:orgID/users", (req, res) =>{
     Organization.findOne(
         {_id: mongoose.Types.ObjectId(req.params.orgID)}, 
+        {'_id':0,'users' : 1},
+        (err, docs) => {
+            if (err || docs == null) res.json({"Error": (docs != null)? err:"Docs is null"})
+            else res.json(docs.users)
+        }
+    );
+});
+
+//POST User
+router.post("/:orgID/users/:userID", (req, res) =>{
+    //Add a user to this org
+    Organization.findOne({'_id' : mongoose.Types.ObjectId(req.params.orgID)},
         {'users' : 1},
         (err, docs) => {
-            if(err || docs == null){
+            if (err || docs == null){
                 res.json({"Error": (docs != null)? err:"Docs is null"})
             } else {
-                res.json(docs.users)
+                docs.users.set(req.params.userID, "Admin")
+                docs.save(sErr => {
+                    if (sErr) res.json({"Error":`${sErr +""}`})
+                    else res.json({"message" : `User ${result.full_name} added successfully.`});
+                });
             }
         }
     );

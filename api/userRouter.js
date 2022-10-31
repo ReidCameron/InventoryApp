@@ -15,60 +15,33 @@ for (const val of values) {
 Object.freeze(UserPermissions);
 
 //GET ALL
-//Return every user in an organization
-//TODO: Turn into returning every user in database for a search
+//Return every user in database for a search
 router.get("/", (req, res) => {
-    const orgID = mongoose.Types.ObjectId(JSON.parse(Object.keys(req.query)[0]).orgID);
-    Organization.findOne({"_id": orgID}, {'_id':0,'users' : 1}, (err, docs)=>{
+    User.find({}, {full_name: 1}, (err, docs) => {
         if (err || docs == null) res.json({"Error": (docs != null)? err:"Docs is null"})
         else res.json(docs)
     });
 });
 
 //POST
-//http://localhost:3000/.netlify/functions/server/api/v1/user/debug
 router.post("/", (req, res) =>{
     //Create a new User
-    const orgID = mongoose.Types.ObjectId(req.body.orgID);
-    const user = new User(req.body);
-    user.organization_ids.push(orgID);
-    user.save().then( result => {
-        const userID = result._id;
-        Organization.findOne({'_id' : orgID},
-            {'users' : 1},
-            (err, docs) => {
-                if (err || docs == null){
-                    res.json({"Error": (docs != null)? `${err +""}`:"Docs is null"})
-                } else {
-                    docs.users.set(userID, "Admin")
-                    docs.save(sErr => {
-                        if(sErr){
-                            res.json({"Error":`${sErr +""}`})
-                        } else {
-                            res.json({"message" : `User ${result.first_name} ${result.last_name} created successfully.`});
-                        }
-                    })
-                }
-            }
-        );
-    }).catch( err => {
-        res.json({"Error": err})
-    });
+    User.create(req.body).then(result => {
+        res.json({"Message" : `User ${result.full_name} created successfully`})
+    }).catch( err => res.json({"Error": err}))
 });
 
 //GET 1
+//Return user that matches userID
 router.get("/:userID", (req, res) =>{
-    //Return user that matches userID
-    User.findById(req.params.userID).then( result => {
-        res.json(result);
-    });
+    User.findById(req.params.userID).then( result => res.json(result) );
 });
 
 //PUT (update)
 router.put("/:userID", (req, res) =>{
     //Update user fields
     User.findByIdAndUpdate(req.params.userID, req.body).then( result => {
-        res.json({"message" : `User ${result.first_name} ${result.last_name} updated successfully.`});
+        res.json({"message" : `User ${result.full_name} updated successfully.`});
     });
 });
 
@@ -87,7 +60,7 @@ router.delete("/:userID", (req, res) =>{
                         if (sErr){
                             res.json({"Error":`${sErr +""}`})
                         } else {
-                            res.json({"message" : `User ${result.first_name} ${result.last_name} deleted successfully.`});
+                            res.json({"message" : `User ${result.full_name} deleted successfully.`});
                         }
                     });
                 }
