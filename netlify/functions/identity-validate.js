@@ -1,4 +1,4 @@
-const axios = require('axios');
+const axios = require('axios').default;
 
 exports.handler = async function (event, context) {
   // const { identity, user } = context.clientContext;
