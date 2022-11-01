@@ -8,6 +8,7 @@ exports.handler = async function (event, context) {
 
   //Create user through API
   const ret = await axios.post(uri, {
+    access_token: process.env.access_token,
     auth_id: userID,
     full_name: body.user.user_metadata.full_name,
   }).then( res => {

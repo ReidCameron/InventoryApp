@@ -4,6 +4,7 @@ const organizationRouter = require('./organizationRouter');
 const departmentRouter = require('./departmentRouter');
 const categoryRouter = require('./categoryRouter');
 const itemRouter = require('./itemRouter');
+const { User } = require('../models/user');
 const userRouter = require('./userRouter').router;
 
 //Example URLs
@@ -19,14 +20,23 @@ router.get("/", (req, res) => {
 });
 
 //Middleware
-//Limit access to requests through netlify only
-// router.use("/", (req, res, next) => {
-//     if(req.body.access_token === process.env.access_token){
-//         next()
-//     } else {
-//         res.json({"Error":"Invalid Access Token. Please make an account."});
-//     }
-// });
+//Limit access to API
+router.use("/", (req, res, next) => {
+    //First Time Users (from identity-validate)
+    if(req.body.access_token === process.env.access_token ){
+        next()
+    } else {
+    //Existing Users (from netlify identity auth_id)
+        User.exists({auth_id : req.body.auth_id}, (err, docs)=> { 
+            if (docs == null){
+                res.json({"Error": "Access Denied. An account is required to make an API request."});
+                return;
+            } else {
+                next();
+            }
+        });
+    }
+});
 //Format input string
 router.use("/", (req, res, next) => {
     //prevents fields from being set to empty string
