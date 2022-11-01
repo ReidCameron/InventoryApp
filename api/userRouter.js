@@ -24,7 +24,7 @@ router.get("/", (req, res) => {
 });
 
 //POST
-//TODO: Limit to 1 user per netlify account
+//TODO: Determine if auth_id check is needed to limit to 1 user per netlify account
 router.post("/", (req, res) =>{
     //Create a new User
     User.create(req.body).then(result => {
