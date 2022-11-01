@@ -24,4 +24,8 @@ exports.handler = async function (event, context) {
   //     body: JSON.stringify({ Error: "User Post Unsuccessful" }),
   //   };
   // });
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ Message: "New User Posted" }),
+    };
 };
