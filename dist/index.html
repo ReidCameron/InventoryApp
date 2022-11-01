@@ -6,17 +6,21 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <script>
-        netlifyIdentity.on('init', async user => {
-          if(user){
-            console.log("in user");
-            console.log(user);
-          } else {
-            console.log("no user");
-          }
-        });
+      netlifyIdentity.on('login', user => {
+        location.replace("https://inventoryapp-reidcj.netlify.app/dashboard")
+      });
+
+        // netlifyIdentity.on('init', async user => {
+        //   if(user){
+        //     console.log("in user");
+        //     console.log(user);
+        //   } else {
+        //     console.log("no user");
+        //   }
+        // });
     </script>
   <link rel="stylesheet" href="styles.fcb05b4d4f32d35b.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles.fcb05b4d4f32d35b.css"></noscript></head>
   <body>
     <app-root></app-root>
-  <script src="runtime.79d21f8bbc5382a8.js" type="module"></script><script src="polyfills.5621ba7993d298c9.js" type="module"></script><script src="main.d8055a329bdff89b.js" type="module"></script>
+  <script src="runtime.79d21f8bbc5382a8.js" type="module"></script><script src="polyfills.5621ba7993d298c9.js" type="module"></script><script src="main.734527faa4b3c0f9.js" type="module"></script>
 </body></html>
