@@ -7,15 +7,10 @@ const itemRouter = require('./itemRouter');
 const userRouter = require('./userRouter').router;
 
 //Example URLs
-// https://www.app.domain.com/api/v1/organizations/orgID
-// https://www.app.domain.com/api/v1/departments/depID
-// https://www.app.domain.com/api/v1/categories/catID
-// https://www.app.domain.com/api/v1//items/itemID
-// https://www.app.domain.com/api/v1/users/userID
 // http://inventoryapp-reidcj.netlify.app/.netlify/functions/server/api/v1/
 
 const router = express.Router();
-const v = "v1"; //version number, (v1, v2, v3, etc.) //version number
+const v = "v1"; //version number, (v1, v2, v3, etc.)
 
 //API Routes
 router.get("/", (req, res) => {
@@ -24,7 +19,14 @@ router.get("/", (req, res) => {
 });
 
 //Middleware
-
+//Limit access to requests through netlify only
+// router.use("/", (req, res, next) => {
+//     if(req.body.access_token === process.env.access_token){
+//         next()
+//     } else {
+//         res.json({"Error":"Invalid Access Token. Please make an account."});
+//     }
+// });
 //Format input string
 router.use("/", (req, res, next) => {
     //prevents fields from being set to empty string
