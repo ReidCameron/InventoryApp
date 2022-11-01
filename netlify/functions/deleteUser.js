@@ -4,9 +4,9 @@ exports.handler = async function (event, context) {
   // const uri = "https://inventoryapp-reidcj.netlify.app/.netlify/functions/server/api/v1/users"
   // https://inventoryapp-reidcj.netlify.app/.netlify/functions/deleteUser
   const { identity, user } = context.clientContext;
-  const userID = user.sub;
-  const userUrl = `${identity.url}/admin/users/{${userID}}`;
-  const adminAuthHeader = `Bearer ${identity.token}`;
+  // const userID = user.sub;
+  // const userUrl = `${identity.url}/admin/users/{${userID}}`;
+  // const adminAuthHeader = `Bearer ${identity.token}`;
 
   console.log(identity);
   console.log(user);
