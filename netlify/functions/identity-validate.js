@@ -23,6 +23,6 @@ exports.handler = async function (event, context) {
       body: JSON.stringify({ Error: "User Post Unsuccessful" }),
     };
   });
-
+  console.log("END VALIDATE")
   return ret;
 };
