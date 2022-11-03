@@ -2,10 +2,12 @@ const axios = require('axios').default;
 
 exports.handler = async function (event, context) {
   // const { identity, user } = context.clientContext;
-  console.log("RAN VALIDATE")
+  console.log("------------RAN VALIDATE------------")
   const body = JSON.parse(event.body)
   const userID = body.user.id;
   const uri = "https://inventoryapp-reidcj.netlify.app/.netlify/functions/server/api/v1/users"
+
+  console.log(body);
 
   //Create user through API
   const ret = await axios.post(uri, {
@@ -23,6 +25,6 @@ exports.handler = async function (event, context) {
       body: JSON.stringify({ Error: "User Post Unsuccessful" }),
     };
   });
-  console.log("END VALIDATE")
+  console.log("------------END VALIDATE------------")
   return ret;
 };
