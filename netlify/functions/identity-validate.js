@@ -2,6 +2,7 @@ const axios = require('axios').default;
 
 exports.handler = async function (event, context) {
   // const { identity, user } = context.clientContext;
+  console.log("RAN VALIDATE")
   const body = JSON.parse(event.body)
   const userID = body.user.id;
   const uri = "https://inventoryapp-reidcj.netlify.app/.netlify/functions/server/api/v1/users"
