@@ -7,14 +7,15 @@ const userSchema = new Schema({
         required: true
     },
     full_name: {
-        type: String,
-        required: true
+        type: String
     },
     first_name: {
         type: String,
+        required: true
     },
     last_name: {
         type: String,
+        required: true
     },
     organization_ids: Array,
 });

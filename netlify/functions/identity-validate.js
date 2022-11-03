@@ -13,7 +13,9 @@ exports.handler = async function (event, context) {
   const ret = await axios.post(uri, {
     access_token: process.env.access_token,
     auth_id: userID,
-    full_name: body.user.user_metadata.full_name,
+    first_name: body.user.user_metadata.first_name,
+    last_name: body.user.user_metadata.last_name,
+    full_name: body.user.user_metadata.name
   }).then( res => {
     return {
       statusCode: 200,
