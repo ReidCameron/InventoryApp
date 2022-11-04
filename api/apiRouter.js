@@ -24,17 +24,14 @@ router.get("/", (req, res) => {
 router.use("/", (req, res, next) => {
     //First Time Users (from identity-validate)
     if(req.body.access_token === process.env.access_token ){
-        console.log("ACCESS GRANTED");
         next()
     } else {
     //Existing Users (from netlify identity auth_id)
         User.exists({auth_id : req.body.auth_id}, (err, docs)=> { 
             if (docs == null){
-                console.log("ACCESS DENIED");
                 res.json({"Error": "Access Denied. An account is required to make an API request."});
                 return;
             } else {
-                console.log("ACCESS GRANTED");
                 next();
             }
         });
