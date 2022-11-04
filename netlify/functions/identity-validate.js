@@ -6,7 +6,7 @@ exports.handler = async function (event, context) {
   console.log(user);
   const body = JSON.parse(event.body)
   const userID = body.user.id;
-  const uri = "https://inventoryapp-reidcj.netlify.app/.netlify/functions/server/api/v1/users"
+  const uri = "https://inventoryapp-reidcj.netlify.app/.netlify/functions/server/api/v1/0/users"
   // 'https://inventoryapp-reidcj.netlify.app/.netlify/identity/user'
   //Create user through API
   const ret = await axios.post(uri, {
@@ -15,11 +15,11 @@ exports.handler = async function (event, context) {
     first_name: body.user.user_metadata.first_name,
     last_name: body.user.user_metadata.last_name,
   }).then( res => {
-    // auth = new GoTrue({
-    //   APIUrl: 'https://inventoryapp-reidcj.netlify.app/.netlify/identity',
-    //   audience: '',
-    //   setCookie: false,
-    // });
+    auth = new GoTrue({
+      APIUrl: 'https://inventoryapp-reidcj.netlify.app/.netlify/identity',
+      audience: '',
+      setCookie: false,
+    });
     // // let user : GoTrue.User;
     // user.update({
     //   app_metadata: {
