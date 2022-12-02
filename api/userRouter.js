@@ -61,12 +61,12 @@ router.get("/:userID", (req, res) =>{
 //PUT (update)
 router.put("/my", (req, res) =>{
     //Update user fields
-    User.findByIdAndUpdate(
+    User.updateOne(
         {auth_id : req.body.auth_id},
         req.body,
         (err, docs) =>{
             if (err || docs == null) res.json({"Error": (docs != null)? `${err +""}`:"Docs is null"})
-            else res.json(docs)
+            else res.json({"message": "User updated successfully"});
         }
     );
 });

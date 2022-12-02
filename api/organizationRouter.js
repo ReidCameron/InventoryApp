@@ -159,7 +159,7 @@ router.post("/:orgID/users/:userID", (req, res) =>{
                 docs.users.set(req.params.userID, "Admin")
                 docs.save(sErr => {
                     if (sErr) res.json({"Error":`${sErr +""}`})
-                    else res.json({"message" : `User ${result.full_name} added successfully.`});
+                    else res.json({"message" : `User added successfully.`});
                 });
             }
         }

@@ -14,5 +14,8 @@
     "mongoose": "^6.6.5",
     "netlify-lambda": "^2.0.15",
     "serverless-http": "^3.0.3"
+  },
+  "devDependencies": {
+    "cors": "^2.8.5"
   }
 }
