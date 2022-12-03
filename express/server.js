@@ -8,7 +8,7 @@ const cors = require('cors');
 const app = express();
 
 //Middleware
-app.use(cors());
+// app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -25,9 +25,6 @@ const apiRoute = "/.netlify/functions/server/api"
 
 
 //Netlify Lambda Function
-// app.get("/.netlify/functions/server/identity-login", (req, res) =>{
-//   res.json({"Message" : "user logged in"});
-// });
 app.use(apiRoute, apiRouter);
 
 //Angular App DEBUG
