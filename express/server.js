@@ -2,13 +2,13 @@ const express = require ('express');
 const path = require('path');
 const serverless = require('serverless-http');
 const mongoose = require('mongoose');
-// const cors = require('cors');
+const cors = require('cors');
 
 //Create Express App
 const app = express();
 
 //Middleware
-// app.use(cors());
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
