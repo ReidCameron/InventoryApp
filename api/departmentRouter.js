@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const { Organization } = require('../models/organization');
+const { Category } = require('../models/category');
 const { Department } = require('../models/department');
 
 //Department Router
@@ -91,10 +92,12 @@ router.post("/:depID/categories", (req, res) =>{
             if(err || docs == null){
                 res.json({"Error": (docs != null)? err:"Docs is null"})
             } else {
-                docs.departments.id(req.params.depID).categories.push(new Category(req.body));
+                const newCat = new Category(req.body);
+                docs.departments.id(req.params.depID).categories.push(newCat);
                 docs.save((cErr, cRes) => {
+                    // console.log(newCat._id);
                     if(cErr) res.json({"Error": cErr})
-                    else res.json({"message" : `Category ${req.body.name} created successfully.`});
+                    else res.json({'_id':newCat._id, "message" : `Category ${req.body.name} created successfully.`});
                 });
             }
         }

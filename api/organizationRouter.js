@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const { Organization } = require('../models/organization');
+const { Department } = require('../models/department');
 const { User } = require('../models/user');
 const UserPermissions  = require('./userRouter').UserPermissions;
 
