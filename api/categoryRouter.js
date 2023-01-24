@@ -97,6 +97,7 @@ router.get("/:catID/items", (req, res) => {
 
 //POST
 router.post("/:catID/items", (req, res) =>{
+    console.log(req.body);
     //Create a new item
     const catID = mongoose.Types.ObjectId(req.params.catID);
     Organization.findOne(
@@ -107,11 +108,18 @@ router.post("/:catID/items", (req, res) =>{
                 res.json( {"Error": (docs != null)? err:"Docs return null."})
             } else {
                 //Push new item
-                docs.departments[0].categories.id(catID).items.push(new Item(req.body));
+                let newItem = new Item(req.body)
+                docs.departments[0].categories.id(catID).items.push(newItem);
                 //Save Docs
                 docs.save( (iErr, iRes) => {
                     if (iErr) res.json({"Error":iErr});
-                    else res.json({"Message" : `Item ${req.body.name} created successfully.`});
+                    else {
+                        res.json(
+                            {
+                                "Message" : `Item ${req.body.name} created successfully.`,
+                                "data" : newItem
+                            })
+                    }
                 })
             }
         }
