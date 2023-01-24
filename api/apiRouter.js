@@ -35,7 +35,7 @@ router.use(`/${version}/:auth_id`, (req, res, next) => {
                 return;
             } else {
                 req.body.auth_id = req.params.auth_id; //saves auth_id for other routes to use
-                req.body.exists = true; //prevents existing users from making post requests
+                req.body.exists = true; //prevents existing users from making post requests on user api
                 next();
             }
         });
@@ -56,9 +56,8 @@ dbRouter.use("/", (req, res, next) => {
 
     //adds objectID to prevent id change during put requests
     if(req.body._id !== undefined){
-        req.body._id = mongoose.Types.ObjectId(req.body.ID); 
+        req.body._id = mongoose.Types.ObjectId(req.body._id); 
     }
-    
     next();
 });
 
