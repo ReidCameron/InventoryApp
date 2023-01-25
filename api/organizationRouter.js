@@ -126,12 +126,18 @@ router.get("/:orgID/departments", (req, res) =>{
 //POST Department
 router.post("/:orgID/departments", (req, res) =>{
     //Create a new department
+    let newDep = new Department( req.body );
     Organization.updateOne(
         {"_id" : mongoose.Types.ObjectId(req.params.orgID)}, 
-        { $addToSet : {departments: new Department( req.body )} },
+        { $addToSet : {departments: newDep} },
         err => {
             if (err) res.json({"Error": err});
-            else res.json({"Message": `Dep ${req.body.name} added successfully.`});
+            else res.json(
+                {
+                    "Message": `Dep ${req.body.name} added successfully.`,
+                    data: newDep
+                }
+            );
         }
     );
 });

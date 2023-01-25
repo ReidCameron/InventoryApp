@@ -97,7 +97,13 @@ router.post("/:depID/categories", (req, res) =>{
                 docs.save((cErr, cRes) => {
                     // console.log(newCat._id);
                     if(cErr) res.json({"Error": cErr})
-                    else res.json({'_id':newCat._id, "message" : `Category ${req.body.name} created successfully.`});
+                    else res.json(
+                        {
+                            '_id' : newCat._id,
+                            "message" : `Category ${req.body.name} created successfully.`,
+                            data : newCat  
+                        }
+                    );
                 });
             }
         }
