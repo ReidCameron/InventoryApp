@@ -74,12 +74,14 @@ router.delete("/:itemID", (req, res) =>{
             res.json( {"Error": (docs[0] != null)? err:"Docs return null."})
         } else {
             Organization.findOne({ 'departments.categories.items._id': itemID },
-                {'departments.categories.items._id' : 1, 'departments.categories._id' : 1,},
+                {'departments.categories.items._id' : 1, 'departments.categories._id' : 1,
+                 'departments._id' : 1},
                 (err, docs2) => {
                     if (err || docs2 == null) res.json( {"Error": (docs2 != null)? err:"Docs return null."})
                     else{
+                        const depID = docs[0].departments._id
                         const catID = docs[0].departments.categories._id
-                        docs2.departments[0].categories.id(catID).items.id(itemID).remove()
+                        docs2.departments.id(depID).categories.id(catID).items.id(itemID).remove()
                         docs2.save((iErr, iRes) => {
                             if (iErr) res.json({"Error":iErr})
                             else res.json({"Message": "Item deleted succesffully."});
